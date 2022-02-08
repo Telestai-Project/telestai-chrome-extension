@@ -3,12 +3,10 @@
   "description": "Use Ravencoin NFTs to sign in to web sites",
   "version": "1.0",
   "manifest_version": 3,
-  "background": {
-    "service_worker": "background.js"
-  },
+ 
   "permissions": ["storage", "activeTab", "scripting"],
   "action": {
     "default_popup": "popup.html"
   },
-  "options_page": "options.html"
+  "icons": { "128": "ravencoin-rvn-logo.png" }
 }
