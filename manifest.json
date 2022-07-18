@@ -1,12 +1,12 @@
 {
-  "name": "Ravencoin sign in",
-  "description": "Use Ravencoin NFTs to sign in to web sites",
+  "name": "Ravencoin extension",
+  "description": "A Ravencoin wallet viewer that enables you to sign messages",
   "version": "1.0",
   "manifest_version": 3,
- 
+
   "permissions": ["storage", "activeTab", "scripting"],
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "./popup.html"
   },
   "icons": { "128": "ravencoin-rvn-logo.png" }
 }
