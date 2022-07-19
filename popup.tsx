@@ -2,13 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { SetWIF } from "./SetWIF";
 import { Sign } from "./Sign";
-
-const Routes = {
-  SIGN: "SIGN",
-  SET_WIF: "SET_WIF",
-  BALANCE: "BALANCE",
-};
-
+import Navigator from "./Navigator";
+import Routes from "./Routes";
+import Help from "./Help";
 function App() {
   const [route, setRoute] = React.useState(Routes.SIGN);
 
@@ -17,34 +13,18 @@ function App() {
       return <Sign />;
     } else if (route === Routes.SET_WIF) {
       return <SetWIF />;
+    } else if (route === Routes.HELP) {
+      return <Help />;
     }
     return null;
   };
 
   return (
     <div>
-      <h1 className="text-lg">Ravencoin sign message</h1>
-      <label
-        htmlFor="advanced"
-        className="flex relative items-center mb-4 cursor-pointer"
-      >
-        <input
-          type="checkbox"
-          id="advanced"
-          className="sr-only"
-          onChange={(e) => {
-            if (e.currentTarget.checked) {
-              setRoute(Routes.SET_WIF);
-            } else {
-              setRoute(Routes.SIGN);
-            }
-          }}
-        />
-        <div className="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600"></div>
-        <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-          Advanced
-        </span>
-      </label>
+      <Navigator setRoute={setRoute} currentRoute={route} />
+      <h1 className="heading">Ravencoin</h1>
+      <img className="logo" src="./ravencoin-rvn-logo.png"></img>
+
       <CurrentView />
     </div>
   );

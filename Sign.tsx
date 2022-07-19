@@ -3,6 +3,8 @@ declare var chrome: any;
 const cryptoStuff = require("./cryptoStuff");
 import useBalance from "./useBalance";
 import Balance from "./Balance";
+import Spacer from "./Spacer";
+
 export function Sign() {
   const [triggerDate, setTriggerDate] = React.useState(new Date());
   const [address, setAddress] = React.useState("");
@@ -25,87 +27,83 @@ export function Sign() {
     });
   }, []);
 
+  function copyAddress() {
+    /* Copy the text inside the text field */
+    navigator.clipboard.writeText(address);
+
+    /* Alert the copied text */
+    alert("Copied the text: " + address);
+  }
+  function copySignature() {
+    /* Copy the text inside the text field */
+    navigator.clipboard.writeText(signature);
+
+    /* Alert the copied text */
+    const message = "Copied signature to clipboard";
+    alert(message);
+  }
   return (
     <div>
-      <form>
-        <div className="mb-6">
-          <Balance balanceObject={balance} />
-          <button
-            onClick={() => setTriggerDate(new Date())}
-            type="button"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-          >
-            Update
-          </button>
+      <div className="mb-6">
+        <Balance balanceObject={balance} />
 
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-            Address
+        <Spacer />
+        <div className="sign--container">
+          <label className="sign--adddress-label">
+            Address{" "}
+            <button className="button--no-style" onClick={copyAddress}>
+              <i className="fa fa-copy"></i>
+            </button>
           </label>
-          <input
-            type="text"
-            id="address"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder=""
-            disabled
-            value={address}
-          />
-
-          <a
-            target="_blank"
-            href={`https://api.ravencoin.org/address/${address}`}
-          >
-            Explore tokens
-          </a>
+          <Spacer small />
+          <small>{address}</small>
         </div>
+      </div>
+      <Spacer />
+      <Spacer />
 
-        {/* MESSAGE */}
-        <div className="mb-6">
-          <label
-            htmlFor="message"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
-          >
-            Message to sign
-          </label>
+      {/* MESSAGE */}
+      <div className="message--container">
+        <label
+          htmlFor="message"
+          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
+        >
+          Message to sign
+        </label>
+        <Spacer small />
+        <textarea
+          className="message--textarea"
+          onChange={(event) => {
+            const m = event.target.value;
+            setMessage(m);
 
-          <textarea
-            onChange={(event) => {
-              const m = event.target.value;
-              setMessage(m);
-            }}
-            id="message"
-            rows={4}
-            value={message}
-            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          ></textarea>
-        </div>
-
-        {/* SIGNATURE */}
-        <div className="mb-6">
-          <label>Signature</label>
-          <textarea
-            value={signature}
-            id="signature"
-            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          ></textarea>
-        </div>
-
-        {/* SIGN BUTTON */}
-        <div className="mb-6">
-          <button
-            onClick={() => {
-              const signature = cryptoStuff
-                .signMessage(wif, message)
-                .toString("base64");
-              setSignature(signature);
-            }}
-            type="button"
-            id="signButton"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Sign
-          </button>
-        </div>
-      </form>
+            const signature = cryptoStuff
+              .signMessage(wif, message)
+              .toString("base64");
+            setSignature(signature);
+          }}
+          id="message"
+          rows={4}
+          value={message}
+        ></textarea>
+      </div>
+      <Spacer />
+      <Spacer />
+      {/* SIGNATURE */}
+      <div className="signature--container">
+        <label>Signature</label>{" "}
+        <button className="button--no-style" onClick={copySignature}>
+          <i className="fa fa-copy"></i>
+        </button>
+        <Spacer small />
+        <textarea
+          disabled
+          value={signature}
+          id="signature"
+          className="signature__textarea"
+          rows={4}
+        ></textarea>
+      </div>
     </div>
   );
 }

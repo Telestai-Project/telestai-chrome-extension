@@ -1,5 +1,5 @@
 {
-  "name": "extension",
+  "name": "@ravenrebels/ravencoin-extension",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -8,8 +8,8 @@
     "build": "parcel build popup.tsx"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Dick Henrik Larsson",
+  "license": "MIT",
   "dependencies": {
     "@ravenrebels/ravencoin-key": "^1.0.0",
     "@ravenrebels/ravencoin-message": "^0.0.6",

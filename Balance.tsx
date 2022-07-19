@@ -1,4 +1,5 @@
 import * as React from "react";
+import Spacer from "./Spacer";
 
 const oneHundredMillion = 100 * 1000 * 1000;
 
@@ -20,8 +21,7 @@ export default function Balance({ balanceObject }) {
 
   return (
     <div>
-      <h1 className="text-xl dark:text-white">Balance</h1>
-      {rvnBalance}
+      <label>Balance: {rvnBalance} RVN</label>
     </div>
   );
 }

@@ -1,0 +1,123 @@
+body {
+  background: #384182; /* Ravencoin blue */
+
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(56, 65, 130, 1) 100%
+  );
+
+  font-family: "Quicksand", sans-serif;
+  min-height: 400px;
+  min-width: 400px;
+}
+#app {
+  font-size: 1.5em;
+  border-radius: 10px;
+  max-width: calc(90vw);
+  margin: auto;
+  margin-top: 5px;
+  padding: 20px;
+  padding-top: 2px;
+}
+.heading {
+  padding-top: 0;
+  margin-top: 0;
+}
+.glassy {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+
+  color: white;
+}
+
+.navigator {
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+
+  padding-left: 0;
+  padding: 10px;
+}
+
+.navigator--item {
+  display: block;
+}
+.navigator--item-link {
+  color: white;
+  text-decoration: none;
+}
+.navigator--item-link--active {
+  border-bottom: 4px solid white;
+}
+
+.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border-color: grey;
+
+  position: absolute;
+  top: 50px;
+  right: 26px;
+}
+
+.sign--adddress-label {
+  display: block;
+}
+.sign--address {
+  display: block;
+  width: 90%;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.message--container {
+  display: block;
+}
+
+.message--textarea {
+  width: 90%;
+  padding: 5px;
+}
+
+.signature__textarea {
+  width: 90%;
+  padding: 5px;
+}
+
+.button--no-style {
+  font-size: 1em;
+  background: white;
+  border: none;
+  color: black;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+
+  cursor: pointer;
+}
+
+.logo {
+  background: white;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  padding: 3px;
+
+  position: absolute;
+  top: 80px;
+  right: 22px;
+}
+
+.help a {
+  color: white;
+  text-decoration: underline;
+}
