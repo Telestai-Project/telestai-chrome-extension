@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { SetWIF } from "./SetWIF";
-import { Sign } from "./Sign";
-import Navigator from "./Navigator";
+import { SetWIF } from "./views/SetWIF";
+import { Sign } from "./views/Sign";
+import Navigator from "./components//Navigator";
 import Routes from "./Routes";
-import Help from "./Help";
+import Help from "./views/Help";
 function App() {
   const [route, setRoute] = React.useState(Routes.SIGN);
 

@@ -8,10 +8,17 @@ export default function Balance({ balanceObject }) {
     return null;
   }
 
-  console.log(balanceObject);
   let rvnBalance = 0;
 
   const addresses = Object.keys(balanceObject.balance);
+
+  if (addresses.length === 0) {
+    return (
+      <div>
+        <label>Balance: Not available right now</label>
+      </div>
+    );
+  }
 
   addresses.map((address) => {
     const b = rvnBalance + balanceObject.balance[address].balance.confirmed;

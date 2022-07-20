@@ -1,9 +1,9 @@
 import React from "react";
 declare var chrome: any;
-const cryptoStuff = require("./cryptoStuff");
-import useBalance from "./useBalance";
-import Balance from "./Balance";
-import Spacer from "./Spacer";
+const cryptoStuff = require("../utils/cryptoStuff");
+import useBalance from "../useBalance";
+import Balance from "../components/Balance";
+import Spacer from "../components/Spacer";
 
 export function Sign() {
   const [triggerDate, setTriggerDate] = React.useState(new Date());

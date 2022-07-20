@@ -1,5 +1,5 @@
 import React from "react";
-import * as DataHandler from "./DataHandler";
+import * as DataHandler from "./utils/DataHandler";
 
 /*
   This hooks i responsible for fetching balances for *addresses*
