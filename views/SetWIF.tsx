@@ -1,11 +1,25 @@
 import * as React from "react";
 import * as RavencoinKey from "@ravenrebels/ravencoin-key";
-
 import Spacer from "../components/Spacer";
+import isValidWIF from "../utils/isValidWIF";
 declare var chrome: any;
-export function SetWIF() {
+
+/**
+ * We handle two cases
+ *
+ * 1) Fresh start, WIF is not set
+ * easy peasy
+ * 2) WIF exists, user set WIF before.
+ * In this case the default value of the input field should be the "old" WIF.
+ * We only set the new value of WIF when the user clicks the save button, not before.
+ * During the time the user is interacting with the input field we save the state in "value"
+ *
+ *
+ *
+ */
+export function SetWIF({ wif, setWIF, onSuccess }) {
   const [address, setAddress] = React.useState("");
-  const [wif, setWIF] = React.useState("");
+  const [value, setValue] = React.useState(wif);
   React.useEffect(() => {
     chrome.storage.sync.get("privateKeyWIF", ({ privateKeyWIF }) => {
       const address = RavencoinKey.getAddressByWIF("rvn", privateKeyWIF);
@@ -31,17 +45,20 @@ export function SetWIF() {
           placeholder=""
           required
           onChange={(event) => {
-            const value = event.target.value;
-            setWIF(value);
+            const v = event.target.value;
+            setValue(v);
           }}
-          value={wif}
+          value={value === null ? wif : value}
         />
       </div>
       <Spacer small />
+      <Valid wif={value} />
       <button
         className="button"
         onClick={() => {
-          chrome.storage.sync.set({ privateKeyWIF: wif });
+          chrome.storage.sync.set({ privateKeyWIF: value });
+          setWIF(value);
+          onSuccess();
         }}
         type="button"
         id="saveButton"
@@ -50,4 +67,18 @@ export function SetWIF() {
       </button>
     </div>
   );
+}
+
+function Valid({ wif }) {
+  const styles = {
+    background: "red",
+    color: "white",
+  };
+  const valid = isValidWIF(wif);
+
+  if (valid === true) {
+    return null;
+  } else {
+    return <div style={styles}>WIF is NOT VALID</div>;
+  }
 }

@@ -17,6 +17,12 @@ import * as DataHandler from "./utils/DataHandler";
 let cache = {};
 let cacheTriggerDate = null;
 export default function useBalance(addresses, triggerDate) {
+  if (!addresses) {
+    return {};
+  }
+  if (addresses.length === 0) {
+    return {};
+  }
   //Empty cache if new trigger date
   if (cacheTriggerDate !== triggerDate) {
     cache = {};

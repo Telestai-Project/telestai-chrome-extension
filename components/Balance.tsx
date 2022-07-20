@@ -7,7 +7,9 @@ export default function Balance({ balanceObject }) {
   if (!balanceObject) {
     return null;
   }
-
+  if (!balanceObject.balance) {
+    return null;
+  }
   let rvnBalance = 0;
 
   const addresses = Object.keys(balanceObject.balance);

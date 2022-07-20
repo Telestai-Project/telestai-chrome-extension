@@ -1,44 +1,52 @@
 import React from "react";
 declare var chrome: any;
-const cryptoStuff = require("../utils/cryptoStuff");
+
 import useBalance from "../useBalance";
 import Balance from "../components/Balance";
 import Spacer from "../components/Spacer";
-
-export function Sign() {
+import ROUTES from "../Routes";
+import * as cryptoStuff from "../utils/cryptoStuff";
+import isValidWIF from "../utils/isValidWIF";
+export function Sign({ setRoute, wif, setWIF }) {
   const [triggerDate, setTriggerDate] = React.useState(new Date());
-  const [address, setAddress] = React.useState("");
+
+  //Start by converting the stored WIF to a Ravencoin address.
+  //If that failes, inform the user
+  let address = null;
+
+  if (isValidWIF(wif) === true) {
+    address = cryptoStuff.getAddress(wif);
+  } else {
+    alert("Somethign seems wrong with your WIF");
+    //Redirect user to Set WIF view
+    setRoute(ROUTES.SET_WIF);
+  }
+
   const [addresses] = React.useState([]);
   const [message, setMessage] = React.useState("");
   const [signature, setSignature] = React.useState("");
-  const [wif, setWIF] = React.useState("");
 
+  if (!wif) {
+    setRoute(ROUTES.SET_WIF);
+    return (
+      <div>
+        <h3> No address set</h3>
+      </div>
+    );
+  }
   if (address && addresses.length === 0) {
     addresses.push(address);
     setTriggerDate(new Date());
   }
 
   const balance = useBalance(addresses, triggerDate);
-  React.useEffect(() => {
-    chrome.storage.sync.get("privateKeyWIF", ({ privateKeyWIF }) => {
-      const address = cryptoStuff.getAddress(privateKeyWIF);
-      setWIF(privateKeyWIF);
-      setAddress(address);
-    });
-  }, []);
 
   function copyAddress() {
-    /* Copy the text inside the text field */
-    navigator.clipboard.writeText(address);
-
-    /* Alert the copied text */
+    navigator.clipboard.writeText(address + "");
     alert("Copied the text: " + address);
   }
   function copySignature() {
-    /* Copy the text inside the text field */
     navigator.clipboard.writeText(signature);
-
-    /* Alert the copied text */
     const message = "Copied signature to clipboard";
     alert(message);
   }
