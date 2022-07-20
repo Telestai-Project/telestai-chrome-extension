@@ -42,13 +42,24 @@ export function Sign({ setRoute, wif, setWIF }) {
   const balance = useBalance(addresses, triggerDate);
 
   function copyAddress() {
-    navigator.clipboard.writeText(address + "");
-    alert("Copied the text: " + address);
+    const promise = navigator.clipboard.writeText(address + "");
+
+    promise.then((data) => {});
+
+    promise.catch((e) => {
+      console.log(e);
+      alert("Ooops error, could not copy address");
+    });
   }
   function copySignature() {
-    navigator.clipboard.writeText(signature);
-    const message = "Copied signature to clipboard";
-    alert(message);
+    const promise = navigator.clipboard.writeText(signature);
+
+    promise.then((data) => {});
+
+    promise.catch((e) => {
+      console.log(e);
+      alert("Ooops error, could not copy signature");
+    });
   }
   return (
     <div>
