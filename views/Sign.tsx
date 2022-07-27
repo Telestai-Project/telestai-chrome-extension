@@ -24,7 +24,6 @@ export function Sign({ setRoute, wif, setWIF }) {
 
   const [addresses] = React.useState([]);
   const [message, setMessage] = React.useState("");
-  const [signature, setSignature] = React.useState("");
 
   if (!wif) {
     setRoute(ROUTES.SET_WIF);
@@ -40,6 +39,8 @@ export function Sign({ setRoute, wif, setWIF }) {
   }
 
   const balance = useBalance(addresses, triggerDate);
+
+  const signature = cryptoStuff.signMessage(wif, message).toString("base64");
 
   function copyAddress() {
     const promise = navigator.clipboard.writeText(address + "");
@@ -95,11 +96,6 @@ export function Sign({ setRoute, wif, setWIF }) {
           onChange={(event) => {
             const m = event.target.value;
             setMessage(m);
-
-            const signature = cryptoStuff
-              .signMessage(wif, message)
-              .toString("base64");
-            setSignature(signature);
           }}
           id="message"
           rows={4}
