@@ -14,6 +14,10 @@ to build for production
 
 # How to install
 
+# Testing
+
+Unit tests and UI-tests are upcomming.
+
 First you build to package.
 After that, follow Googles guide
 https://developer.chrome.com/docs/extensions/mv3/getstarted/#unpacked
