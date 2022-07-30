@@ -5,14 +5,16 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel popup.tsx",
-    "build": "parcel build popup.tsx"
+    "build": "parcel build popup.tsx",
+    "buildZipFile": "node buildZipFile.js"
   },
   "keywords": [],
-  "author": "Dick Henrik Larsson",
+  "author": "Raven Rebels, Dick Henrik Larsson",
   "license": "MIT",
   "dependencies": {
     "@ravenrebels/ravencoin-key": "^1.0.0",
     "@ravenrebels/ravencoin-message": "^0.0.6",
+    "adm-zip": "^0.5.9",
     "axios": "^0.27.2",
     "lodash.chunk": "^4.2.0",
     "parcel": "^2.2.1",

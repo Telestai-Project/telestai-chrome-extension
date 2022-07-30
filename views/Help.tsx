@@ -11,9 +11,8 @@ export default function Help() {
       <h2>Getting started</h2>
       <p>
         To get started you need a private key for a Ravencoin address in WIF
-        format. A wallet import format (WIF, also known as a wallet export
-        format) is a way of encoding a private ECDSA key so as to make it easier
-        to copy
+        format (wallet import format). WIF turns your private key into pure
+        text.
       </p>
       <h2>Brought to you by Raven Rebels</h2>
       <p>

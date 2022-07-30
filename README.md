@@ -7,10 +7,23 @@ To build and run this locally you neeed to have node.js installed.
 `npm install`
 
 for local development
-`npm start`
+
+```
+npm start
+```
 
 to build for production
-`npm run build`
+
+```
+npm run build
+```
+
+to bundle the extension as ZIP-file run
+
+```
+npm run build
+npm run buildZipFile
+```
 
 # How to install
 
