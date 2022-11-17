@@ -8,8 +8,6 @@ import ROUTES from "../Routes";
 import * as cryptoStuff from "../utils/cryptoStuff";
 import isValidWIF from "../utils/isValidWIF";
 export function Sign({ setRoute, wif, setWIF }) {
-  const [triggerDate, setTriggerDate] = React.useState(new Date());
-
   //Start by converting the stored WIF to a Ravencoin address.
   //If that failes, inform the user
   let address = null;
@@ -35,11 +33,10 @@ export function Sign({ setRoute, wif, setWIF }) {
   }
   if (address && addresses.length === 0) {
     addresses.push(address);
-    setTriggerDate(new Date());
   }
 
-  const balance = useBalance(addresses, triggerDate);
-
+  const balance = useBalance(addresses);
+  console.log("BALANCE", balance);
   const signature = cryptoStuff.signMessage(wif, message).toString("base64");
 
   function copyAddress() {
@@ -65,9 +62,6 @@ export function Sign({ setRoute, wif, setWIF }) {
   return (
     <div>
       <div className="mb-6">
-        <Balance balanceObject={balance} />
-
-        <Spacer />
         <div className="sign--container">
           <label className="sign--adddress-label">
             Address{" "}
@@ -98,7 +92,7 @@ export function Sign({ setRoute, wif, setWIF }) {
             setMessage(m);
           }}
           id="message"
-          rows={4}
+          rows={2}
           value={message}
         ></textarea>
       </div>
@@ -119,6 +113,8 @@ export function Sign({ setRoute, wif, setWIF }) {
           rows={4}
         ></textarea>
       </div>
+      <Spacer />
+      <Balance balanceObject={balance} />
     </div>
   );
 }
