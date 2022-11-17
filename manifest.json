@@ -1,7 +1,7 @@
 {
-  "name": "Ravencoin extension",
-  "description": "A Ravencoin wallet viewer that enables you to sign messages",
-  "version": "1.0",
+  "name": "Ravencoin Sign message extension",
+  "description": "An extension that enables the user to create Digital Signatures using a Ravencoin address",
+  "version": "1.0.1",
   "manifest_version": 3,
 
   "permissions": ["storage"],
