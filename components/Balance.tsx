@@ -15,7 +15,7 @@ export default function Balance({ balanceObject }) {
   console.log("Confirmed assets", confirmedAssets);
 
   return (
-    <div>
+    <div className="balance glassy">
       <h3>Balance</h3>
       <ListAssets confirmedAssets={confirmedAssets} />
     </div>
@@ -42,6 +42,22 @@ function ListAssets({ confirmedAssets }) {
           return (
             <tr key={asset.assetName}>
               <td>
+                <button
+                  className="button--no-style"
+                  onClick={() => {
+                    navigator.clipboard.writeText(asset.assetName);
+                  }}
+                >
+                  <i className="fa fa-copy"></i>
+                </button>
+              </td>
+
+              <td>
+                {asset.assetName}
+                <br />
+                <small>{amount.toLocaleString()}</small>
+              </td>
+              <td>
                 <img
                   className="asset__thumbnail"
                   src={imageURL}
@@ -52,8 +68,6 @@ function ListAssets({ confirmedAssets }) {
                   }}
                 />
               </td>
-              <td>{asset.assetName}</td>
-              <td>{amount.toLocaleString()}</td>
             </tr>
           );
         })}

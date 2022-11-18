@@ -25,12 +25,19 @@ body {
 }
 table {
   width: 100%;
-  text-align: right;
+  text-align: left;
   font-size: 90%;
 }
+table tr td:last-child {
+  text-align: right;
+}
+table td {
+  padding-bottom: 20px;
+}
 .asset__thumbnail {
-  max-width: 100px;
-  max-height: 100px;
+  max-width: 60px;
+  max-height: 60px;
+  border-radius: 2px;
 }
 .heading {
   padding-top: 0;
@@ -59,6 +66,7 @@ table {
 
 .navigator--item {
   display: block;
+  font-size: 80%;
 }
 .navigator--item-link {
   color: white;
@@ -147,4 +155,8 @@ table {
   border-radius: 10px;
   font-family: "Quicksand", sans-serif;
   padding: 10px;
+}
+
+.balance {
+  padding: 15px;
 }

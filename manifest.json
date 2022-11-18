@@ -1,7 +1,7 @@
 {
-  "name": "Ravencoin Sign message extension",
+  "name": "LOCAL Ravencoin Sign message extension",
   "description": "An extension that enables the user to create Digital Signatures using a Ravencoin address",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "manifest_version": 3,
 
   "permissions": ["storage"],

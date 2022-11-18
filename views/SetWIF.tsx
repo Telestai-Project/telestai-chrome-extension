@@ -20,6 +20,8 @@ declare var chrome: any;
 export function SetWIF({ wif, setWIF, onSuccess }) {
   const [address, setAddress] = React.useState("");
   const [value, setValue] = React.useState(wif);
+  const [plainText, setPlainText] = React.useState(false);
+
   React.useEffect(() => {
     chrome.storage.sync.get("privateKeyWIF", ({ privateKeyWIF }) => {
       const address = RavencoinKey.getAddressByWIF("rvn", privateKeyWIF);
@@ -28,6 +30,7 @@ export function SetWIF({ wif, setWIF, onSuccess }) {
     });
   }, []);
 
+  const inputType = plainText === true ? "text" : "password";
   return (
     <div>
       <div className="set-wif__container">
@@ -38,8 +41,19 @@ export function SetWIF({ wif, setWIF, onSuccess }) {
           Private key in Wallet Import Format
         </label>
         <Spacer small />
+        <label>
+          Show plain text
+          <input
+            checked={plainText}
+            type="checkbox"
+            name="plainText"
+            onChange={(event) => {
+              setPlainText(event.target.checked);
+            }}
+          />
+        </label>
         <input
-          type="password"
+          type={inputType}
           id="privateKeyWIF"
           className="set-wif__input"
           placeholder=""

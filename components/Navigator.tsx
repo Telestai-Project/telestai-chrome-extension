@@ -29,7 +29,7 @@ export default function Navigator(props: IProps) {
   return (
     <div>
       <ul className="navigator glassy">
-        <Item itemRoute={Routes.SIGN} label="HOME" />
+        <Item itemRoute={Routes.SIGN} label="Home" />
         <Item itemRoute={Routes.SET_WIF} label="Settings" />
         <Item itemRoute={Routes.HELP} label="Help" />
       </ul>
