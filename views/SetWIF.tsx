@@ -21,7 +21,25 @@ export function SetWIF({ wif, setWIF, onSuccess }) {
   const [address, setAddress] = React.useState("");
   const [value, setValue] = React.useState(wif);
   const [plainText, setPlainText] = React.useState(false);
+  const [infoMessage, setInfoMessage] = React.useState("");
 
+  /*
+    A message that will "last" for X seconds
+    After X seconds, if the this info message is the last one it is cleared.
+
+  */
+  const inform = (message) => {
+    const clearInfoMessage = () => {
+      setInfoMessage((orgValue) => {
+        if (orgValue === message) {
+          return "";
+        }
+        return orgValue;
+      });
+    };
+    setInfoMessage(message);
+    setTimeout(clearInfoMessage, 10 * 1000);
+  };
   React.useEffect(() => {
     chrome.storage.sync.get("privateKeyWIF", ({ privateKeyWIF }) => {
       const address = RavencoinKey.getAddressByWIF("rvn", privateKeyWIF);
@@ -34,6 +52,54 @@ export function SetWIF({ wif, setWIF, onSuccess }) {
   return (
     <div>
       <div className="set-wif__container">
+        <label>
+          <button
+            className="button--no-style"
+            onClick={(event) => {
+              setPlainText(!plainText);
+            }}
+            title="Toggle visibility"
+          >
+            {" "}
+            <i
+              className={
+                plainText ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"
+              }
+            ></i>
+          </button>
+        </label>
+        <button
+          style={{ marginLeft: "20px" }}
+          className="button"
+          onClick={() => {
+            const mnemonic = RavencoinKey.generateMnemonic();
+            const account = 0;
+            const position = 0;
+
+            const addressPair = RavencoinKey.getAddressPair(
+              "rvn",
+              mnemonic,
+              account,
+              position
+            );
+
+            const WIF = addressPair.external.WIF;
+            console.log("WIF", WIF);
+            setValue(WIF);
+            inform(
+              "Ok, generated a new Private Key for you.\nPlease write it down, store a copy somewhere safe"
+            );
+          }}
+        >
+          Generate new Private Key
+        </button>
+
+        <Spacer />
+
+        <p>
+          <em>{infoMessage}</em>
+        </p>
+
         <label
           htmlFor="privateKeyWIF"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
@@ -41,17 +107,7 @@ export function SetWIF({ wif, setWIF, onSuccess }) {
           Private key in Wallet Import Format
         </label>
         <Spacer small />
-        <label>
-          Show plain text
-          <input
-            checked={plainText}
-            type="checkbox"
-            name="plainText"
-            onChange={(event) => {
-              setPlainText(event.target.checked);
-            }}
-          />
-        </label>
+
         <input
           type={inputType}
           id="privateKeyWIF"
@@ -67,18 +123,20 @@ export function SetWIF({ wif, setWIF, onSuccess }) {
       </div>
       <Spacer small />
       <Valid wif={value} />
-      <button
-        className="button"
-        onClick={() => {
-          chrome.storage.sync.set({ privateKeyWIF: value });
-          setWIF(value);
-          onSuccess();
-        }}
-        type="button"
-        id="saveButton"
-      >
-        Save
-      </button>
+      {wif !== value && (
+        <button
+          className="button"
+          onClick={() => {
+            chrome.storage.sync.set({ privateKeyWIF: value });
+            setWIF(value);
+            onSuccess();
+          }}
+          type="button"
+          id="saveButton"
+        >
+          Save changes
+        </button>
+      )}
     </div>
   );
 }

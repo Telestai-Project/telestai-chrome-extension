@@ -1,3 +1,8 @@
+html,
+body {
+  height: 355px;
+  width: 500px;
+}
 body {
   background: #384182; /* Ravencoin blue */
 
@@ -9,10 +14,6 @@ body {
   );
 
   font-family: "Quicksand", sans-serif;
-  min-height: 600px;
-  min-width: 500px;
-  width: 100%;
-  height: 100%;
 }
 #app {
   font-size: 1.5em;
@@ -145,7 +146,8 @@ table td {
 
 .set-wif__input {
   width: 90%;
-  padding: 5px;
+  padding: 10px;
+  font-size: 60%;
 }
 
 /* Generic stuff */
