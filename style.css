@@ -2,6 +2,8 @@ html,
 body {
   height: 355px;
   width: 500px;
+  padding: 0;
+  margin: 0;
 }
 body {
   background: #384182; /* Ravencoin blue */
@@ -17,10 +19,7 @@ body {
 }
 #app {
   font-size: 1.5em;
-  border-radius: 10px;
-  max-width: calc(90vw);
-  margin: auto;
-  margin-top: 5px;
+
   padding: 20px;
   padding-top: 2px;
 }
@@ -143,9 +142,15 @@ table td {
   color: white;
   text-decoration: underline;
 }
-
+.set-wif__container {
+  overflow: hidden;
+  width: 100%;
+}
+.set-wif__cancel {
+  float: right;
+}
 .set-wif__input {
-  width: 90%;
+  width: 100%;
   padding: 10px;
   font-size: 60%;
 }

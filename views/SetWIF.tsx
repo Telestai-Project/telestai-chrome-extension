@@ -124,18 +124,24 @@ export function SetWIF({ wif, setWIF, onSuccess }) {
       <Spacer small />
       <Valid wif={value} />
       {wif !== value && (
-        <button
-          className="button"
-          onClick={() => {
-            chrome.storage.sync.set({ privateKeyWIF: value });
-            setWIF(value);
-            onSuccess();
-          }}
-          type="button"
-          id="saveButton"
-        >
-          Save changes
-        </button>
+        <>
+          <button
+            className="button"
+            onClick={() => {
+              chrome.storage.sync.set({ privateKeyWIF: value });
+              setWIF(value);
+              onSuccess();
+            }}
+            type="button"
+            id="saveButton"
+          >
+            Save changes
+          </button>
+
+          <button className="button set-wif__cancel" onClick={onSuccess}>
+            Cancel
+          </button>
+        </>
       )}
     </div>
   );
