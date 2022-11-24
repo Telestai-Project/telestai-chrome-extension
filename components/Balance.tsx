@@ -31,6 +31,9 @@ function ListAssets({ confirmedAssets }) {
       <tbody>
         {confirmedAssets.map((asset) => {
           console.log(asset);
+          if (asset.balance === 0) {
+            return null;
+          }
           const amount = asset.balance / 1e8;
 
           const searchParams = new URLSearchParams("");
