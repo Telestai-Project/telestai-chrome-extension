@@ -6,11 +6,21 @@ import Navigator from "./components//Navigator";
 import ROUTES from "./Routes";
 import Help from "./views/Help";
 
+import { LogIn } from "./views/LogIn";
+
 declare var chrome: any;
 
 function App() {
   const [route, setRoute] = React.useState(ROUTES.INITIALIZING);
   const [wif, setWIF] = React.useState(null);
+
+  const [isRavenRebels, setIsRavenRebels] = React.useState(false);
+  const [orderRef, setOrderRef] = React.useState("");
+
+  const [
+    userHasToldIsNotToUseInstantSignIn,
+    setUserHasToldIsNotToUseInstantSignIn,
+  ] = React.useState(false);
 
   /* at startup read the saved value privateKeyWIF */
   React.useEffect(() => {
@@ -20,6 +30,47 @@ function App() {
     });
   }, []);
 
+  /* Check if we can have instant sign in / log on / log in */
+  const checkForOrderRef = async () => {
+
+    if(userHasToldIsNotToUseInstantSignIn === true){
+      return null;
+    }
+    const [tab] = await chrome.tabs.query({
+      active: true,
+      lastFocusedWindow: true,
+    });
+    const response = await chrome.tabs.sendMessage(tab.id, {
+      popup: { status: "alive" },
+    });
+    if (response && response.url) {
+      const URL = response.url;
+      const index = URL.indexOf("?");
+      const search = URL.substring(index);
+      const params = new URLSearchParams(search);
+
+      setOrderRef(params.get("orderRef"));
+      setIsRavenRebels(true);
+    }
+  };
+
+  React.useEffect(() => {
+    //Tell the world we are opened
+    checkForOrderRef();
+    const interval = setInterval(checkForOrderRef, 2 * 1000);
+
+    return () => {
+      clearInterval(interval); //clean up interval when componet is un-mounted
+    };
+  }, []);
+
+  if (isRavenRebels && wif && orderRef && userHasToldIsNotToUseInstantSignIn === false) {
+    const cancel = () => {
+      setUserHasToldIsNotToUseInstantSignIn(true);
+      setOrderRef(null);
+    };
+    return <LogIn orderRef={orderRef} wif={wif} onCancel={cancel} />;
+  }
   const CurrentView = () => {
     if (route === ROUTES.SIGN) {
       return <Sign setRoute={setRoute} wif={wif} setWIF={setWIF} />;

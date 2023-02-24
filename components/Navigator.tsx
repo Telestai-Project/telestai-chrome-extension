@@ -9,7 +9,6 @@ export default function Navigator(props: IProps) {
   function Item({ itemRoute, label }) {
     let classNames = "navigator--item-link";
 
-    console.log("Compare", itemRoute, props.currentRoute);
     if (itemRoute === props.currentRoute) {
       classNames += " navigator--item-link--active";
     }

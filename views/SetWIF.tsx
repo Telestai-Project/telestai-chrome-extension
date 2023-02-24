@@ -84,7 +84,7 @@ export function SetWIF({ wif, setWIF, onSuccess }) {
             );
 
             const WIF = addressPair.external.WIF;
-            console.log("WIF", WIF);
+ 
             setValue(WIF);
             inform(
               "Ok, generated a new Private Key for you.\nPlease write it down, store a copy somewhere safe"

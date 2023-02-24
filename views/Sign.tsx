@@ -36,7 +36,7 @@ export function Sign({ setRoute, wif, setWIF }) {
   }
 
   const balance = useBalance(addresses);
-  console.log("BALANCE", balance);
+ 
   const signature = cryptoStuff.signMessage(wif, message).toString("base64");
 
   function copyAddress() {

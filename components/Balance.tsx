@@ -12,7 +12,7 @@ export default function Balance({ balanceObject }) {
   let rvnBalance = 0;
 
   const confirmedAssets = balanceObject.balance;
-  console.log("Confirmed assets", confirmedAssets);
+ 
 
   return (
     <div className="balance glassy">
@@ -30,7 +30,7 @@ function ListAssets({ confirmedAssets }) {
     <table>
       <tbody>
         {confirmedAssets.map((asset) => {
-          console.log(asset);
+ 
           if (asset.balance === 0) {
             return null;
           }
