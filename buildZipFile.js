@@ -8,6 +8,7 @@ async function createZipArchive() {
 
   //Add the dist folder, contains CSS and JavaScript
   zip.addLocalFolder("dist", "dist");
+  zip.addLocalFile("content_script.js");
 
   //Add master style sheet
   zip.addLocalFile("style.css");
