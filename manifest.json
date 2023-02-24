@@ -5,7 +5,7 @@
 
   "content_scripts": [
     {
-      "matches": ["http://localhost/*", "https://idp.ravenrebels.com/*"],
+      "matches": ["https://idp.ravenrebels.com/*"],
       "js": ["content_script.js"]
     }
   ],
@@ -14,5 +14,5 @@
   "manifest_version": 3,
   "name": "Ravencoin Sign message extension",
   "permissions": ["storage", "activeTab"],
-  "version": "1.3.8"
+  "version": "1.3.9"
 }
