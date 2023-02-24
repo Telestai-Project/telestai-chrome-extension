@@ -32,5 +32,8 @@ npm run buildZipFile
 Unit tests and UI-tests are upcomming.
 
 First you build to package.
-After that, follow Googles guide
+After that, follow Googles guide to test the extension locally
 https://developer.chrome.com/docs/extensions/mv3/getstarted/#unpacked
+
+# Publish to Chrome Web Store
+https://support.google.com/chrome/a/answer/2714278?hl=en
