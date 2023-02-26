@@ -49,6 +49,7 @@ export function LogIn({ wif, orderRef, onCancel }) {
       const obj = {
         nft: firstUniqueAssset.assetName,
         signature: signature,
+        address,
         orderRef,
       };
       axios.post(URL, obj);

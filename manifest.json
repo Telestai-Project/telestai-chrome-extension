@@ -14,5 +14,5 @@
   "manifest_version": 3,
   "name": "Ravencoin Sign message extension",
   "permissions": ["storage", "activeTab"],
-  "version": "1.3.9"
+  "version": "1.4.0"
 }
