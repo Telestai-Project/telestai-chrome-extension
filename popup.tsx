@@ -40,6 +40,10 @@ function App() {
       active: true,
       lastFocusedWindow: true,
     });
+
+    if (!tab) {
+      return null;
+    }
     const response = await chrome.tabs.sendMessage(tab.id, {
       popup: { status: "alive" },
     });
