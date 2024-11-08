@@ -164,3 +164,32 @@ table td {
   margin-bottom: 20px;
   padding: 10px;
 }
+
+.mnemonic-input-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.mnemonic-input {
+  width: calc(33.33% - 10px); /* Three inputs per row with gap */
+  padding: 10px;
+  border: 2px solid #c1c1c1; /* Light grey border */
+  border-radius: 20px; /* Rounded corners for bubble effect */
+  background-color: white;
+  color: #050708; /* Almost black text */
+  font-size: 1em;
+  text-align: center;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.mnemonic-input:focus {
+  border-color: #9c9876; /* Light gold on focus */
+  box-shadow: 0 0 5px rgba(156, 152, 118, 0.5); /* Light gold shadow */
+  outline: none;
+}
+
+.mnemonic-input::placeholder {
+  color: #c1c1c1; /* Light grey placeholder */
+}
