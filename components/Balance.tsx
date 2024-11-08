@@ -9,7 +9,7 @@ export default function Balance({ balanceObject }) {
   if (!balanceObject.balance) {
     return null;
   }
-  let rvnBalance = 0;
+  let tlsBalance = 0;
 
   const confirmedAssets = balanceObject.balance;
  

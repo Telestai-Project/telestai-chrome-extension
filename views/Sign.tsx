@@ -4,11 +4,11 @@ declare var chrome: any;
 import useBalance from "../useBalance";
 import Balance from "../components/Balance";
 import Spacer from "../components/Spacer";
-import ROUTES from "../Routes";
+import ROUTES from "../routes";
 import * as cryptoStuff from "../utils/cryptoStuff";
 import isValidWIF from "../utils/isValidWIF";
 export function Sign({ setRoute, wif, setWIF }) {
-  //Start by converting the stored WIF to a Ravencoin address.
+  //Start by converting the stored WIF to a Telestai address.
   //If that failes, inform the user
   let address = null;
 

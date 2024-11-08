@@ -5,7 +5,7 @@ body {
   min-width: 500px;
 }
 body {
-  background: #384182; /* Ravencoin blue */
+  background: #9c9876; /* Light gold */
   color: white;
 
   font-family: "Quicksand", sans-serif;
@@ -39,7 +39,7 @@ table td {
 }
 .glassy {
   background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   border-radius: 10px;
@@ -74,7 +74,7 @@ table td {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  border-color: grey;
+  border-color: #c1c1c1; /* Light grey */
 
   position: absolute;
   top: 50px;
@@ -111,7 +111,7 @@ table td {
   font-size: 1em;
   background: white;
   border: none;
-  color: black;
+  color: #050708; /* Almost black */
   border-radius: 50%;
   width: 30px;
   height: 30px;
@@ -120,11 +120,10 @@ table td {
 }
 
 .logo {
-  background: white;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  padding: 3px;
+  border-radius: 0;
+  width: auto;
+  height: auto;
+  padding: 0;
 
   position: absolute;
   top: 80px;

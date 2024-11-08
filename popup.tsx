@@ -4,7 +4,7 @@ import React from "react";
 import { SetWIF } from "./views/SetWIF";
 import { Sign } from "./views/Sign";
 import Navigator from "./components//Navigator";
-import ROUTES from "./Routes";
+import ROUTES from "./routes";
 import Help from "./views/Help";
 
 import { LogIn } from "./views/LogIn";
@@ -102,8 +102,8 @@ function App() {
   return (
     <div>
       <Navigator setRoute={setRoute} currentRoute={route} />
-      <h1 className="heading">Ravencoin</h1>
-      <img className="logo" src="./ravencoin-rvn-logo.png"></img>
+      <h1 className="heading">Telestai</h1>
+      <img className="logo" src="./telestai128.png"></img>
       <CurrentView />
     </div>
   );

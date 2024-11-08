@@ -1,4 +1,4 @@
-# ravencoin-chrome-extension
+# Telestai-chrome-extension
 
 To build and run this locally you neeed to have node.js installed.
 

@@ -1,18 +1,18 @@
-import * as RavencoinKey from "@ravenrebels/ravencoin-key";
-import * as RavencoinMessage from "@ravenrebels/ravencoin-message";
+import * as TelestaiKey from "@telestai-project/telestai-key";
+import * as TelestaiMessage from "@telestai-project/telestai-message";
 
 export function getAddress(privateKeyWIF) {
   if (!privateKeyWIF) {
     return null;
   }
 
-  const network = "rvn";
-  const addressObject = RavencoinKey.getAddressByWIF(network, privateKeyWIF);
+  const network = "tls";
+  const addressObject = TelestaiKey.getAddressByWIF(network, privateKeyWIF);
   return addressObject.address;
 }
 export function signMessage(privateKeyWIF, message) {
-  const network = "rvn";
-  const addressObject = RavencoinKey.getAddressByWIF(network, privateKeyWIF);
+  const network = "tls";
+  const addressObject = TelestaiKey.getAddressByWIF(network, privateKeyWIF);
   const privateKey = Buffer.from(addressObject.privateKey, "hex");
-  return RavencoinMessage.sign(message, privateKey);
+  return TelestaiMessage.sign(message, privateKey);
 }

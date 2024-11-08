@@ -9,10 +9,10 @@
       "js": ["content_script.js"]
     }
   ],
-  "description": "An extension that enables the user to create Digital Signatures using a Ravencoin address",
-  "icons": { "128": "ravencoin-rvn-logo.png" },
+  "description": "An extension that enables the user to create Digital Signatures using a Telestai address",
+  "icons": { "128": "telestai128.png" },
   "manifest_version": 3,
-  "name": "Ravencoin Sign message extension",
+  "name": "Zeroa by Telestai",
   "permissions": ["storage", "activeTab"],
   "version": "1.4.1"
 }

@@ -13,7 +13,7 @@ async function createZipArchive() {
   //Add master style sheet
   zip.addLocalFile("style.css");
   //add logo
-  zip.addLocalFile("ravencoin-rvn-logo.png");
+  zip.addLocalFile("telestai128.png");
 
   //Add popup.html
   zip.addLocalFile("popup.html");

@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as RavencoinKey from "@ravenrebels/ravencoin-key";
+import * as TelestaiKey from "@telestai-project/telestai-key";
 import Spacer from "../components/Spacer";
 import isValidWIF from "../utils/isValidWIF";
 declare var chrome: any;
@@ -42,7 +42,7 @@ export function SetWIF({ wif, setWIF, onSuccess }) {
   };
   React.useEffect(() => {
     chrome.storage.sync.get("privateKeyWIF", ({ privateKeyWIF }) => {
-      const address = RavencoinKey.getAddressByWIF("rvn", privateKeyWIF);
+      const address = TelestaiKey.getAddressByWIF("tls", privateKeyWIF);
       setAddress(address);
       setWIF(privateKeyWIF);
     });
@@ -72,12 +72,12 @@ export function SetWIF({ wif, setWIF, onSuccess }) {
           style={{ marginLeft: "20px" }}
           className="button"
           onClick={() => {
-            const mnemonic = RavencoinKey.generateMnemonic();
+            const mnemonic = TelestaiKey.generateMnemonic();
             const account = 0;
             const position = 0;
 
-            const addressPair = RavencoinKey.getAddressPair(
-              "rvn",
+            const addressPair = TelestaiKey.getAddressPair(
+              "tls",
               mnemonic,
               account,
               position
