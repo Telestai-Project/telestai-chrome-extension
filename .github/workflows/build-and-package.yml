@@ -11,12 +11,12 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Set up Node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v4
       with:
-        node-version: '16' # Use the Node.js version you prefer
+        node-version: '20' # Update to the latest LTS version
 
     - name: Install dependencies
       run: npm install
@@ -28,7 +28,7 @@ jobs:
       run: npm run buildZipFile
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: extension-zip
         path: extension.zip
