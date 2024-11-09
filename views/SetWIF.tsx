@@ -22,6 +22,7 @@ export function SetWIF({ wif, setWIF, onSuccess }) {
   const [value, setValue] = React.useState(wif);
   const [plainText, setPlainText] = React.useState(false);
   const [infoMessage, setInfoMessage] = React.useState("");
+  const [mnemonicWords, setMnemonicWords] = React.useState(Array(12).fill(""));
 
   /*
     A message that will "last" for X seconds
@@ -49,49 +50,51 @@ export function SetWIF({ wif, setWIF, onSuccess }) {
   }, []);
 
   const inputType = plainText === true ? "text" : "password";
+
+  const generateNewWIF = () => {
+    const mnemonic = TelestaiKey.generateMnemonic();
+    setMnemonicWords(mnemonic.split(" "));
+    inform("Generated a new mnemonic. Please store it safely.");
+  };
+
+  const deriveWIFFromMnemonic = () => {
+    const mnemonic = mnemonicWords.join(" ");
+    if (TelestaiKey.isMnemonicValid(mnemonic)) {
+      const account = 0;
+      const position = 0;
+      const addressPair = TelestaiKey.getAddressPair("tls", mnemonic, account, position);
+      const WIF = addressPair.external.WIF;
+      setValue(WIF);
+      inform("Derived WIF from the provided mnemonic.");
+    } else {
+      inform("Invalid mnemonic. Please check and try again.");
+    }
+  };
+
+  const handleMnemonicChange = (index, value) => {
+    const newMnemonicWords = [...mnemonicWords];
+    newMnemonicWords[index] = value;
+    setMnemonicWords(newMnemonicWords);
+  };
+
   return (
     <div>
       <div className="set-wif__container">
         <label>
           <button
             className="button--no-style"
-            onClick={(event) => {
-              setPlainText(!plainText);
-            }}
+            onClick={() => setPlainText(!plainText)}
             title="Toggle visibility"
           >
-            {" "}
-            <i
-              className={
-                plainText ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"
-              }
-            ></i>
+            <i className={plainText ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}></i>
           </button>
         </label>
         <button
           style={{ marginLeft: "20px" }}
           className="button"
-          onClick={() => {
-            const mnemonic = TelestaiKey.generateMnemonic();
-            const account = 0;
-            const position = 0;
-
-            const addressPair = TelestaiKey.getAddressPair(
-              "tls",
-              mnemonic,
-              account,
-              position
-            );
-
-            const WIF = addressPair.external.WIF;
- 
-            setValue(WIF);
-            inform(
-              "Ok, generated a new Private Key for you.\nPlease write it down, store a copy somewhere safe"
-            );
-          }}
+          onClick={generateNewWIF}
         >
-          Generate new Private Key
+          Generate new Mnemonic
         </button>
 
         <Spacer />
@@ -114,12 +117,40 @@ export function SetWIF({ wif, setWIF, onSuccess }) {
           className="set-wif__input"
           placeholder=""
           required
-          onChange={(event) => {
-            const v = event.target.value;
-            setValue(v);
-          }}
+          onChange={(event) => setValue(event.target.value)}
           value={value === null ? wif : value}
         />
+
+        <Spacer small />
+
+        <label
+          htmlFor="mnemonic"
+          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+        >
+          Enter Mnemonic
+        </label>
+        <Spacer small />
+
+        <div className="mnemonic-input-container">
+  {mnemonicWords.map((word, index) => (
+    <input
+              key={index}
+              type="text"
+              placeholder={`Word ${index + 1}`}
+              className="mnemonic-input"
+              value={word}
+              onChange={(e) => handleMnemonicChange(index, e.target.value)}
+            />
+          ))}
+        </div>
+
+        <button
+          className="button"
+          onClick={deriveWIFFromMnemonic}
+          style={{ marginTop: "10px" }}
+        >
+          Derive WIF from Mnemonic
+        </button>
       </div>
       <Spacer small />
       <Valid wif={value} />

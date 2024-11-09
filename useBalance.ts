@@ -2,33 +2,36 @@ import axios from "axios";
 import React from "react";
 
 export default function useBalance(addresses) {
-  const [balance, setBlalance] = React.useState(null);
-  if (!addresses) {
-    return {};
-  }
-  if (addresses.length === 0) {
+  const [balance, setBalance] = React.useState(null);
+
+  if (!addresses || addresses.length === 0) {
     return {};
   }
 
   React.useEffect(() => {
     async function fetchBalance() {
-      const URL = "https://rebel-balance-front.herokuapp.com/balance";
-      const payload = {
-        addresses,
-      };
-      const asdf = await axios.post(URL, payload);
-      setBlalance(asdf.data);
+      try {
+        const balances = await Promise.all(
+          addresses.map(async (address) => {
+            const response = await axios.get(`https://blockbook.telestai.io/api/v2/address/${address}`);
+            const txData = response.data;
+            return { [address]: txData.balance };
+          })
+        );
+
+        const combinedBalances = balances.reduce((acc, curr) => ({ ...acc, ...curr }), {});
+        setBalance(combinedBalances);
+      } catch (error) {
+        console.error('Failed to fetch balance:', error);
+      }
     }
 
     fetchBalance();
 
     const interval = setInterval(fetchBalance, 60 * 1000);
 
-    const cleanUp = function () {
-      clearInterval(interval);
-    };
-    return cleanUp;
-  }, []);
+    return () => clearInterval(interval);
+  }, [addresses]);
 
   return balance;
 }

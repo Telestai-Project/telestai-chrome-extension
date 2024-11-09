@@ -5,7 +5,7 @@
 
   "content_scripts": [
     {
-      "matches": ["https://idp.ravenrebels.com/*"],
+      "matches": ["https://blockbook.telestai.io/*"],
       "js": ["content_script.js"]
     }
   ],

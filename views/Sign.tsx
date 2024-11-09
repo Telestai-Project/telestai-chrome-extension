@@ -7,16 +7,14 @@ import Spacer from "../components/Spacer";
 import ROUTES from "../routes";
 import * as cryptoStuff from "../utils/cryptoStuff";
 import isValidWIF from "../utils/isValidWIF";
+
 export function Sign({ setRoute, wif, setWIF }) {
-  //Start by converting the stored WIF to a Telestai address.
-  //If that failes, inform the user
   let address = null;
 
   if (isValidWIF(wif) === true) {
     address = cryptoStuff.getAddress(wif);
   } else {
-    alert("Somethign seems wrong with your WIF");
-    //Redirect user to Set WIF view
+    alert("Something seems wrong with your WIF");
     setRoute(ROUTES.SET_WIF);
   }
 
@@ -36,7 +34,9 @@ export function Sign({ setRoute, wif, setWIF }) {
   }
 
   const balance = useBalance(addresses);
- 
+
+  console.log("Fetched balance:", balance);
+
   const signature = cryptoStuff.signMessage(wif, message).toString("base64");
 
   function copyAddress() {
@@ -46,9 +46,10 @@ export function Sign({ setRoute, wif, setWIF }) {
 
     promise.catch((e) => {
       console.log(e);
-      alert("Ooops error, could not copy address");
+      alert("Oops error, could not copy address");
     });
   }
+
   function copySignature() {
     const promise = navigator.clipboard.writeText(signature);
 
@@ -56,9 +57,10 @@ export function Sign({ setRoute, wif, setWIF }) {
 
     promise.catch((e) => {
       console.log(e);
-      alert("Ooops error, could not copy signature");
+      alert("Oops error, could not copy signature");
     });
   }
+
   return (
     <div>
       <div className="mb-6">
