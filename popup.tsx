@@ -6,8 +6,8 @@ import { Sign } from "./views/Sign";
 import Navigator from "./components//Navigator";
 import ROUTES from "./routes";
 import Help from "./views/Help";
-
 import { LogIn } from "./views/LogIn";
+import Capture from "./views/Capture";
 
 declare var chrome: any;
 
@@ -80,6 +80,7 @@ function App() {
     };
     return <LogIn orderRef={orderRef} wif={wif} onCancel={cancel} />;
   }
+
   const CurrentView = () => {
     if (route === ROUTES.SIGN) {
       return <Sign setRoute={setRoute} wif={wif} setWIF={setWIF} />;
@@ -95,6 +96,8 @@ function App() {
       );
     } else if (route === ROUTES.HELP) {
       return <Help />;
+    } else if (route === ROUTES.CAPTURE) {
+      return <Capture />;
     }
     return null;
   };
@@ -108,7 +111,6 @@ function App() {
     </div>
   );
 }
-// After
 
 const container =
   document.getElementById("app") || document.createDocumentFragment();

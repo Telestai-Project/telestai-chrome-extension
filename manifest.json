@@ -13,6 +13,9 @@
   "icons": { "128": "telestai128.png" },
   "manifest_version": 3,
   "name": "Zeroa by Telestai",
-  "permissions": ["storage", "activeTab"],
+  "permissions": ["storage", "activeTab", "tabs"],
+  "background": {
+    "service_worker": "background.js"
+  },
   "version": "1.4.1"
 }

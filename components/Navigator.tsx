@@ -30,7 +30,7 @@ export default function Navigator(props: IProps) {
       <ul className="navigator glassy">
         <Item itemRoute={Routes.SIGN} label="Home" />
         <Item itemRoute={Routes.SET_WIF} label="Settings" />
-        <Item itemRoute={Routes.HELP} label="Help" />
+        <Item itemRoute={Routes.CAPTURE} label="Capture" />
       </ul>
     </div>
   );

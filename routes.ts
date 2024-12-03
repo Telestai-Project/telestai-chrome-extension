@@ -4,4 +4,5 @@ export default {
   INITIALIZING: "INITIALIZING",
   SET_WIF: "SET_WIF",
   SIGN: "SIGN",
+  CAPTURE: "CAPTURE",
 };
