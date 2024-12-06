@@ -5,14 +5,16 @@ import "chart.js/auto";
 export default function Capture() {
   const [browsingData, setBrowsingData] = useState({});
   const [isCapturing, setIsCapturing] = useState(false);
-  const [isStreaming, setIsStreaming] = useState(false); // Streaming state
+  const [isStreaming, setIsStreaming] = useState(false);
   const [dataSize, setDataSize] = useState(0);
+  const [address, setAddress] = useState(null);
 
   useEffect(() => {
-    chrome.storage.local.get(["timeData"], (result) => {
+    chrome.storage.local.get(["timeData", "address"], (result) => {
       const data = result.timeData || {};
       setBrowsingData(data);
       calculateDataSize(data);
+      setAddress(result.address || null);
     });
 
     chrome.runtime.sendMessage({ action: "getCaptureStatus" }, (response) => {
@@ -20,7 +22,7 @@ export default function Capture() {
     });
 
     chrome.storage.local.get(["isStreaming"], (result) => {
-      setIsStreaming(result.isStreaming || false); // Load persistent streaming state
+      setIsStreaming(result.isStreaming || false);
     });
   }, []);
 
@@ -35,7 +37,7 @@ export default function Capture() {
   const toggleStreaming = (e) => {
     const streaming = e.target.checked;
     setIsStreaming(streaming);
-    chrome.storage.local.set({ isStreaming: streaming }); // Save streaming state persistently
+    chrome.storage.local.set({ isStreaming: streaming });
     chrome.runtime.sendMessage(
       { action: "toggleStreaming", isStreaming: streaming },
       (response) => {
@@ -74,9 +76,14 @@ export default function Capture() {
     ],
   };
 
+  if (!address) {
+    return <p>No address set.</p>;
+  }
+
   return (
     <div>
       <h2>Browsing Data Capture</h2>
+      <p>Address: {address}</p>
       <p>
         This feature allows you to capture and view the websites you visit and
         the time spent on each. Your data is stored locally and can be deleted

@@ -13,6 +13,7 @@ export function Sign({ setRoute, wif, setWIF }) {
 
   if (isValidWIF(wif) === true) {
     address = cryptoStuff.getAddress(wif);
+    chrome.storage.local.set({ address });
   } else {
     alert("Something seems wrong with your WIF");
     setRoute(ROUTES.SET_WIF);

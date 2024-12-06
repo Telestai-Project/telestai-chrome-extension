@@ -130,12 +130,14 @@ function updateTimeSpent() {
   if (currentTabId && currentUrl && startTime) {
     const timeSpent = (Date.now() - startTime) / 1000;
     console.log(`Spent ${timeSpent.toFixed(2)} seconds on ${currentUrl}`);
-    const data = { url: currentUrl, timeSpent };
 
-    chrome.storage.local.get(["timeData"], (result) => {
+    chrome.storage.local.get(["timeData", "address"], (result) => {
       const timeData = result.timeData || {};
+      const address = result.address || "unknown"; // Fetch address
       timeData[currentUrl] = (timeData[currentUrl] || 0) + timeSpent;
       chrome.storage.local.set({ timeData });
+
+      const data = { url: currentUrl, timeSpent, address }; // Include address
 
       if (isStreaming) {
         console.log("Streaming data to API:", data);
